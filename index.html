@@ -267,6 +267,35 @@ ul,ol{list-style:none}
 .proj--alt .proj-media{grid-column:6/11;aspect-ratio:4/5}
 
 /* ---------- PIXELS ---------- */
+/* projects: pinned stage (desktop) */
+.pj-prog{display:none}
+@media (min-width:901px) and (prefers-reduced-motion:no-preference){
+  .projects{padding:0}
+  .pj-track{height:calc(100vh + 170vh);height:calc(100svh + 170svh)}
+  .pj-pin{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-rows:auto auto minmax(0,1fr);padding-top:calc(84px + env(safe-area-inset-top,0px));padding-bottom:clamp(20px,2.4vw,36px)}
+  .projects .sec-head{margin-bottom:clamp(18px,2.4vh,32px)}
+  .projects .h2{font-size:clamp(3rem,min(7.4vw,12.5vh),9rem)}
+  .pj-stage{position:relative;min-height:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(12px,1.6vw,24px);border-top:1px solid var(--rule-ink)}
+  .pj-stage .proj{position:absolute;inset:0;padding:clamp(16px,2vh,26px) 0 0;border-top:0;pointer-events:none}
+  .pj-stage .proj.on{pointer-events:auto}
+  .pj-stage .proj:nth-child(1){z-index:1}.pj-stage .proj:nth-child(2){z-index:2}.pj-stage .proj:nth-child(3){z-index:3}
+  .pj-stage .proj-n{position:static;overflow:hidden;padding-bottom:.04em}
+  .pj-stage .proj-n>span{display:block;transform:translateY(105%);transition:transform 1s var(--ease)}
+  .pj-stage .proj.on .proj-n>span{transform:none}
+  .pj-stage .proj.past .proj-n>span{transform:translateY(-105%)}
+  .pj-stage .proj-info{align-content:start}
+  .pj-stage .proj-info>*{opacity:0;transform:translateY(28px);transition:opacity .35s,transform .6s var(--ease)}
+  .pj-stage .proj.past .proj-info>*{transform:translateY(-20px)}
+  .pj-stage .proj.on .proj-info>*{opacity:1;transform:none;transition:opacity .6s .15s,transform 1s .15s var(--ease)}
+  .pj-stage .proj.on .proj-info>:nth-child(2){transition-delay:.24s}
+  .pj-stage .proj.on .proj-info>:nth-child(3){transition-delay:.33s}
+  .pj-stage .proj-media,.pj-stage .proj--alt .proj-media{grid-column:6/13;aspect-ratio:auto;height:100%;clip-path:inset(calc((1 - var(--r,1)) * 100%) 0 0 0)}
+  .pj-stage .proj-media img{scale:calc(1.22 - .1 * var(--r,1));translate:0 calc(var(--q,0) * -9%);filter:brightness(calc(1 - var(--q,0) * .35));transition:none}
+  .pj-stage .proj-media:hover img{scale:calc(1.22 - .1 * var(--r,1))}
+  .pj-prog{display:flex;grid-column:3/6;grid-row:1;align-self:end;align-items:center;gap:16px;position:relative;z-index:5;color:var(--mut-ink)}
+  .pj-prog i{flex:1;height:1px;background:var(--rule-ink);position:relative;overflow:hidden}
+  .pj-prog b{position:absolute;inset:0;background:var(--red);transform-origin:left;transform:scaleX(var(--pp,0))}
+}
 /* CLIENTS */
 .clients{background:var(--paper);color:var(--ink);padding-bottom:clamp(40px,5vw,80px)}
 .cl-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(12px,1.6vw,24px);align-items:center;border-top:1px solid var(--rule-ink);border-bottom:1px solid var(--rule-ink);padding-block:clamp(36px,4vw,64px)}
@@ -671,16 +700,17 @@ html.has-cur,html.has-cur *{cursor:none!important}
 
   <!-- PROJECTS -->
   <section class="projects" id="projekti" data-expand aria-labelledby="proj-h">
-    <div class="wrap">
+    <div class="pj-track"><div class="pj-pin wrap">
       <div class="chap mono" data-r><span><span class="dot"></span>Poglavje 03</span><span>Izbrani projekti</span></div>
       <div class="sec-head">
         <h2 class="h2" id="proj-h" data-lines><span class="l"><span>Kjer šteje</span></span><span class="l l2"><span>vsak meter.</span></span></h2>
         <a class="tlink mono" href="https://www.klancar.com/projekti/" target="_blank" rel="noopener" data-r>Vsi projekti <svg class="arr" aria-hidden="true"><use href="#arr"/></svg></a>
       </div>
 
+      <div class="pj-stage">
       <article class="proj">
-        <span class="proj-n" aria-hidden="true">01</span>
-        <div class="proj-info" data-r>
+        <span class="proj-n" aria-hidden="true"><span>01</span></span>
+        <div class="proj-info">
           <h3>Urbana Oaza</h3>
           <dl class="table mono">
             <div><dt>Lokacija</dt><dd>Ljubljana, Koprska ulica</dd></div>
@@ -690,14 +720,14 @@ html.has-cur,html.has-cur *{cursor:none!important}
           </dl>
           <p>Zelo omejen prostor za postavitev opreme in manipulacijo materiala, posebej med montažo žerjavov.</p>
         </div>
-        <a class="proj-media" href="https://www.klancar.com/projekt/urbana-oaza/" target="_blank" rel="noopener" data-mask>
+        <a class="proj-media" href="https://www.klancar.com/projekt/urbana-oaza/" target="_blank" rel="noopener">
           <img src="media/p-urbana.webp" alt="Postavljanje stolpnih žerjavov na gradbišču Urbana Oaza" loading="lazy">
           <span class="tag mono">Ogled projekta <svg class="arr" aria-hidden="true"><use href="#arr"/></svg></span>
         </a>
       </article>
       <article class="proj proj--alt">
-        <span class="proj-n" aria-hidden="true">02</span>
-        <div class="proj-info" data-r>
+        <span class="proj-n" aria-hidden="true"><span>02</span></span>
+        <div class="proj-info">
           <h3>Stara tiskarna – Novi Bežigrad</h3>
           <dl class="table mono">
             <div><dt>Lokacija</dt><dd>Ljubljana</dd></div>
@@ -707,14 +737,14 @@ html.has-cur,html.has-cur *{cursor:none!important}
           </dl>
           <p>Več žerjavov na majhnem urbanem gradbišču, usklajenih po višini, dolžini puščice in delovnem območju.</p>
         </div>
-        <a class="proj-media" href="https://www.klancar.com/projekt/stara-tiskarna-novi-bezigrad/" target="_blank" rel="noopener" data-mask>
+        <a class="proj-media" href="https://www.klancar.com/projekt/stara-tiskarna-novi-bezigrad/" target="_blank" rel="noopener">
           <img src="media/p-tiskarna.webp" alt="Modri stolpni žerjav ob stavbi v mraku" loading="lazy">
           <span class="tag mono">Ogled projekta <svg class="arr" aria-hidden="true"><use href="#arr"/></svg></span>
         </a>
       </article>
       <article class="proj">
-        <span class="proj-n" aria-hidden="true">03</span>
-        <div class="proj-info" data-r>
+        <span class="proj-n" aria-hidden="true"><span>03</span></span>
+        <div class="proj-info">
           <h3>Poslovni objekt LIN</h3>
           <dl class="table mono">
             <div><dt>Lokacija</dt><dd>Ljubljana</dd></div>
@@ -724,12 +754,14 @@ html.has-cur,html.has-cur *{cursor:none!important}
           </dl>
           <p>Glavni žerjav, sidran v temeljno ploščo, dvignjen na 64,5 m na parceli velikosti tlorisa objekta.</p>
         </div>
-        <a class="proj-media" href="https://www.klancar.com/projekt/poslovni-objekt-lin/" target="_blank" rel="noopener" data-mask>
+        <a class="proj-media" href="https://www.klancar.com/projekt/poslovni-objekt-lin/" target="_blank" rel="noopener">
           <img src="media/p-lin.webp" alt="Puščica žerjava nad gradbiščem poslovnega objekta LIN" loading="lazy" style="object-position:50% 35%">
           <span class="tag mono">Ogled projekta <svg class="arr" aria-hidden="true"><use href="#arr"/></svg></span>
         </a>
       </article>
-    </div>
+      <div class="pj-prog" aria-hidden="true"><span class="mono" id="pjCount">01 / 03</span><i><b id="pjBar"></b></i></div>
+      </div>
+    </div></div>
   </section>
 
   <!-- CLIENTS -->
@@ -1039,8 +1071,16 @@ html.has-cur,html.has-cur *{cursor:none!important}
   function clamp(v){return v<0?0:v>1?1:v}
   function cl3(v,a,b){return v<a?a:v>b?b:v}
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+
+  var pjT=document.querySelector('.pj-track'),pjA=[].slice.call(document.querySelectorAll('.pj-stage .proj')),pjC=document.getElementById('pjCount'),pjB=document.getElementById('pjBar'),pjMQ=matchMedia('(min-width:901px)'),pjAct=-1;
+  function pjTick(vh){if(!pjT||reduce||!pjMQ.matches)return;var r=pjT.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;
+    var s=clamp(-r.top/Math.max(1,r.height-vh))*(pjA.length-1),act=0,rs=[];
+    pjA.forEach(function(a,i){var x=i?clamp((s-(i-1)-.22)/.56):1;x=x*x*(3-2*x);rs.push(x);if(x>.5)act=i});
+    pjA.forEach(function(a,i){a.style.setProperty('--r',rs[i].toFixed(4));a.style.setProperty('--q',(rs[i+1]||0).toFixed(4))});
+    if(act!==pjAct){pjAct=act;pjA.forEach(function(a,i){a.classList.toggle('on',i===act);a.classList.toggle('past',i<act)});pjC.textContent='0'+(act+1)+' / 0'+pjA.length}
+    pjB.style.setProperty('--pp',(s/(pjA.length-1)).toFixed(4))}
   function tick(force){
-    var y=scrollY,vh=innerHeight;
+    var y=scrollY,vh=innerHeight;pjTick(vh);
     var r=opening.getBoundingClientRect();var p=clamp(-r.top/(r.height-2*vh)*1.25);var cov=reduce?0:clamp((-r.top-(r.height-2*vh))/vh);opening.firstElementChild.style.setProperty('--cov',cov.toFixed(4));
     card.style.setProperty('--p',reduce?1:ease(p).toFixed(4));
     var rb=cv.getBoundingClientRect();var pp=reduce?1:clamp((vh-rb.top)/(vh*.85));drawPix(pp);
